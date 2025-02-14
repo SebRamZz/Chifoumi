@@ -127,12 +127,6 @@ const Match = () => {
               </div>
           )}
 
-          <img
-              src={`../assets/${turns[turns.length - 1].user1}.png`}
-              alt={turns[turns.length - 1].user1}
-              className="w-24 h-24 object-contain"
-          />
-
           {match.user1 && match.user2 && turns.length < 3 && (
               <>
                 <h3 className="text-lg font-bold mt-6">
