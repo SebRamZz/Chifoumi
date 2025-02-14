@@ -30,13 +30,11 @@ const useMatch = (matchId) => {
 
   useEffect(() => {
     fetchMatch();
-
     const interval = setInterval(() => {
       fetchMatch();
     }, 3000);
-
     return () => clearInterval(interval);
-  }, [matchId, token, match?.turns]);
+  }, [matchId, token]);
 
   const playTurn = async (turnId, move) => {
     try {
@@ -48,7 +46,6 @@ const useMatch = (matchId) => {
         },
         body: JSON.stringify({ move }),
       });
-
       if (!response.ok) {
         const errData = await response.json();
         throw new Error(errData.match || errData.turn || "Error playing turn");
@@ -59,7 +56,6 @@ const useMatch = (matchId) => {
       setError(err.message);
     }
   };
-
 
   return { match, loading, error, playTurn };
 };
