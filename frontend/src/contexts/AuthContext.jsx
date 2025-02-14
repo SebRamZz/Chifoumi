@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await fetch("http://localhost:3002/login", {
+      const response = await fetch("https://chifoumi.kmarques.dev/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, password }),
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, password) => {
     try {
-      const response = await fetch("http://localhost:3002/register", {
+      const response = await fetch("https://chifoumi.kmarques.dev/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, password }),

@@ -12,7 +12,7 @@ export default function useMatch(matchId) {
       if (!matchId) return;
       setLoading(true);
       setError("");
-      const response = await fetch(`http://localhost:3002/matches/${matchId}`, {
+      const response = await fetch(`https://chifoumi.kmarques.dev/matches/${matchId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -33,7 +33,7 @@ export default function useMatch(matchId) {
       setError("");
 
       const response = await fetch(
-        `http://localhost:3002/matches/${matchId}/turns/${turnId}`,
+        `https://chifoumi.kmarques.dev/matches/${matchId}/turns/${turnId}`,
         {
           method: "POST",
           headers: {

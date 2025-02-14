@@ -10,7 +10,7 @@ const useMatches = () => {
     const fetchMatches = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:3002/matches", {
+            const response = await fetch("https://chifoumi.kmarques.dev/matches", {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (response.ok) {
@@ -29,7 +29,7 @@ const useMatches = () => {
         setLoading(true);
         setError("");
         try {
-            const response = await fetch("http://localhost:3002/matches", {
+            const response = await fetch("https://chifoumi.kmarques.dev/matches", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
             });
