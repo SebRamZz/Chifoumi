@@ -102,7 +102,7 @@ const Match = () => {
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                        src={`../../assets/${turns[turns.length - 1].user1}.png`}
+                        src={`/assets/${turns[turns.length - 1].user1}.png`}
                         alt={turns[turns.length - 1].user1}
                         className="w-24 h-24 object-contain"
                     />
@@ -118,7 +118,7 @@ const Match = () => {
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                        src={`/../assets/${turns[turns.length - 1].user2}.png`}
+                        src={`/assets/${turns[turns.length - 1].user2}.png`}
                         alt={turns[turns.length - 1].user2}
                         className="w-24 h-24 object-contain"
                     />
