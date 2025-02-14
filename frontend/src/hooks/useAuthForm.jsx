@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 const useAuthForm = () => {
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -13,9 +13,9 @@ const useAuthForm = () => {
     setError("");
     try {
       if (isRegister) {
-        await register(email, password);
+        await register(username, password);
       } else {
-        await login(email, password);
+        await login(username, password);
       }
     } catch (err) {
       setError("Failed to authenticate. Please try again.");
@@ -25,8 +25,8 @@ const useAuthForm = () => {
   return {
     isRegister,
     setIsRegister,
-    email,
-    setEmail,
+    username,
+    setUsername,
     password,
     setPassword,
     error,

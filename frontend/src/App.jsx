@@ -1,19 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Authentification from "./views/Authentification";
-import Matches from "./views/Matches";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
 import { AuthProvider } from "./contexts/AuthContext";
-import Header from "./components/Header";
+import Authentification from "./views/Authentification";
+import Match from "./views/Match";
+import Matches from "./views/Matches";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Authentification />} />
-          <Route path="/matches" element={<Matches />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Authentification />} />
+            <Route path="/matches" element={<Matches />} />
+            <Route path="/matches/:id" element={<Match />} />
+          </Routes>
+        </Layout>
       </Router>
     </AuthProvider>
   );
