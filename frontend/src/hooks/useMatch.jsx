@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
 
-const API_URL = "https://chifoumi.kmarques.dev/";
+const API_URL = "https://chifoumi.kmarques.dev";
 
 const useMatch = (matchId) => {
   const { token } = useAuth();
