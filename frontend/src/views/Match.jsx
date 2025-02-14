@@ -6,9 +6,6 @@ import FlipCard from "../components/FlipCard" ;
 import MoveButton from "../components/MoveButton";
 import useAuth from "../hooks/useAuth";
 import useMatch from "../hooks/useMatch";
-import rockImg from "../assets/rock.png";
-import paperImg from "../assets/paper.png";
-import scissorsImg from "../assets/scissors.png";
 
 
 function getCurrentTurnId(match) {
@@ -105,7 +102,7 @@ const Match = () => {
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                        src={`/assets/${turns[turns.length - 1].user1}.png`}
+                        src={`../../assets/${turns[turns.length - 1].user1}.png`}
                         alt={turns[turns.length - 1].user1}
                         className="w-24 h-24 object-contain"
                     />
@@ -121,7 +118,7 @@ const Match = () => {
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                        src={`/assets/${turns[turns.length - 1].user2}.png`}
+                        src={`/../assets/${turns[turns.length - 1].user2}.png`}
                         alt={turns[turns.length - 1].user2}
                         className="w-24 h-24 object-contain"
                     />
