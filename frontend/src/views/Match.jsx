@@ -6,6 +6,10 @@ import FlipCard from "../components/FlipCard" ;
 import MoveButton from "../components/MoveButton";
 import useAuth from "../hooks/useAuth";
 import useMatch from "../hooks/useMatch";
+import rockImg from "../assets/rock.png";
+import paperImg from "../assets/paper.png";
+import scissorsImg from "../assets/scissors.png";
+
 
 function getCurrentTurnId(match) {
   const turns = match.turns || [];
@@ -90,92 +94,92 @@ const Match = () => {
               {isUser2 && "(You)"}
             </p>
           </div>
-          <hr className="my-4"/>
+          <hr className="my-4" />
 
           {turns.length > 0 && (
-              <div className="flex items-center justify-evenly my-6">
-                <div className="text-center">
-                  <p className="mb-2 font-semibold">{match.user1?.username}</p>
-                  <FlipCard
-                      autoFlip={turnComplete}
-                      frontContent={<span className="text-4xl text-black">?</span>}
-                      backContent={
-                        <img
-                            src={`/${turns[turns.length - 1].user1}.png`}
-                            alt={turns[turns.length - 1].user1}
-                            className="w-24 h-24 object-contain"
-                        />
+            <div className="flex items-center justify-evenly my-6">
+              <div className="text-center">
+                <p className="mb-2 font-semibold">{match.user1?.username}</p>
+                <FlipCard
+                  autoFlip={turnComplete}
+                  frontContent={<span className="text-4xl text-black">?</span>}
+                  backContent={
+                    <img
+                        src={paperImg}
+                        alt={turns[turns.length - 1].user1}
+                        className="w-24 h-24 object-contain"
+                    />
 
-                      }
-                  />
-                </div>
-                <p className="text-xl font-bold">VS</p>
-                <div className="text-center">
-                  <p className="mb-2 font-semibold">{match.user2?.username}</p>
-                  <FlipCard
-                      autoFlip={turnComplete}
-                      frontContent={<span className="text-4xl text-black">?</span>}
-                      backContent={
-                        <img
-                            src={`./assets/${turns[turns.length - 1].user2}.png`}
-                            alt={turns[turns.length - 1].user2}
-                            className="w-24 h-24 object-contain"
-                        />
-                      }
-                  />
-                </div>
+                  }
+                />
               </div>
+              <p className="text-xl font-bold">VS</p>
+              <div className="text-center">
+              <p className="mb-2 font-semibold">{match.user2?.username}</p>
+                <FlipCard
+                  autoFlip={turnComplete}
+                  frontContent={<span className="text-4xl text-black">?</span>}
+                  backContent={
+                    <img
+                        src={`/assets/${turns[turns.length - 1].user2}.png`}
+                        alt={turns[turns.length - 1].user2}
+                        className="w-24 h-24 object-contain"
+                    />
+                  }
+                />
+              </div>
+            </div>
           )}
 
           {match.user1 && match.user2 && turns.length < 3 && (
-              <>
-                <h3 className="text-lg font-bold mt-6">
-                  {playMessage} (Turn {currentTurnId})
-                </h3>
-                <div className="flex space-x-2 mt-2">
-                  <MoveButton
-                      move="rock"
-                      onSelect={handlePlay}
-                      disabled={!canPlay}
-                      className="w-24 h-24"
-                  />
-                  <MoveButton
-                      move="paper"
-                      onSelect={handlePlay}
-                      disabled={!canPlay}
-                      className="w-24 h-24"
-                  />
-                  <MoveButton
-                      move="scissors"
-                      onSelect={handlePlay}
-                      disabled={!canPlay}
-                      className="w-24 h-24"
-                  />
-                </div>
-              </>
+            <>
+              <h3 className="text-lg font-bold mt-6">
+                {playMessage} (Turn {currentTurnId})
+              </h3>
+              <div className="flex space-x-2 mt-2">
+                <MoveButton
+                  move="rock"
+                  onSelect={handlePlay}
+                  disabled={!canPlay}
+                  className="w-24 h-24"
+                />
+                <MoveButton
+                  move="paper"
+                  onSelect={handlePlay}
+                  disabled={!canPlay}
+                  className="w-24 h-24"
+                />
+                <MoveButton
+                  move="scissors"
+                  onSelect={handlePlay}
+                  disabled={!canPlay}
+                  className="w-24 h-24"
+                />
+              </div>
+            </>
           )}
 
           {match.user1 && match.user2 && turns.length === 3 && match.winner && (
-              <div className="mt-6 p-4 bg-black rounded text-center">
-                <h3 className="text-2xl font-bold">
-                  Winner: {match.winner.username}
-                </h3>
-              </div>
+            <div className="mt-6 p-4 bg-black rounded text-center">
+              <h3 className="text-2xl font-bold">
+                Winner: {match.winner.username}
+              </h3>
+            </div>
           )}
 
           <div className="mt-6">
             <h3 className="text-lg font-bold">Turns History</h3>
             {turns && turns.length > 0 ? (
-                turns.map((turn, idx) => (
-                    <div key={idx} className="border-b py-2">
-                      <p>
-                        <strong>Turn {idx + 1}:</strong> {turn.user1} vs{" "}
-                        {turn.user2} | Winner: {turn.winner || "N/A"}
-                      </p>
-                    </div>
-                ))
+              turns.map((turn, idx) => (
+                <div key={idx} className="border-b py-2">
+                  <p>
+                    <strong>Turn {idx + 1}:</strong> {turn.user1} vs{" "}
+                    {turn.user2} | Winner: {turn.winner || "N/A"}
+                  </p>
+                </div>
+              ))
             ) : (
-                <p>No turns yet.</p>
+              <p>No turns yet.</p>
             )}
           </div>
         </CardBody>
