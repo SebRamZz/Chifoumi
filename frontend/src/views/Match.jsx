@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import Card, { CardBody, CardFooter, CardHeader } from "../components/Card";
-import FlipCard from "../components/FlipCard";
+import FlipCard from "../components/FlipCard" ;
 import MoveButton from "../components/MoveButton";
 import useAuth from "../hooks/useAuth";
 import useMatch from "../hooks/useMatch";
@@ -101,24 +101,25 @@ const Match = () => {
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                      src={`/assets/${turns[turns.length - 1].user1}.png`}
-                      alt={turns[turns.length - 1].user1}
-                      style={{ width: 100, height: 100 }}
+                        src={`/assets/${turns[turns.length - 1].user1}.png`}
+                        alt={turns[turns.length - 1].user1}
+                        className="w-24 h-24 object-contain"
                     />
+
                   }
                 />
               </div>
               <p className="text-xl font-bold">VS</p>
               <div className="text-center">
-                <p className="mb-2 font-semibold">{match.user2?.username}</p>
+              <p className="mb-2 font-semibold">{match.user2?.username}</p>
                 <FlipCard
                   autoFlip={turnComplete}
                   frontContent={<span className="text-4xl text-black">?</span>}
                   backContent={
                     <img
-                      src={`/assets/${turns[turns.length - 1].user2}.png`}
-                      alt={turns[turns.length - 1].user2}
-                      style={{ width: 100, height: 100 }}
+                        src={`/assets/${turns[turns.length - 1].user2}.png`}
+                        alt={turns[turns.length - 1].user2}
+                        className="w-24 h-24 object-contain"
                     />
                   }
                 />
