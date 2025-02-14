@@ -1,64 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
 
-export default function useMatch(matchId) {
+const API_URL = "https://chifoumi.kmarques.dev/";
+
+const useMatch = (matchId) => {
   const { token } = useAuth();
   const [match, setMatch] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchMatch = async () => {
     try {
-      if (!matchId) return;
       setLoading(true);
-      setError("");
-      const response = await fetch(`https://chifoumi.kmarques.dev/matches/${matchId}`, {
+      const response = await fetch(`${API_URL}/matches/${matchId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (response.ok) {
-        setMatch(await response.json());
-      } else {
-        setError("Failed to fetch match");
+      if (!response.ok) {
+        throw new Error("Error fetching match data");
       }
-    } catch (error) {
-      setError(error.message);
+      const data = await response.json();
+      setMatch(data);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchMatch();
+    const interval = setInterval(() => {
+      fetchMatch();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [matchId, token]);
 
   const playTurn = async (turnId, move) => {
     try {
-      setLoading(true);
-      setError("");
-
-      const response = await fetch(
-        `https://chifoumi.kmarques.dev/matches/${matchId}/turns/${turnId}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ move }),
-        }
-      );
+      const response = await fetch(`${API_URL}/matches/${matchId}/turns/${turnId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ move }),
+      });
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(
-          err.match || err.turn || err.user || "Error playing move"
-        );
+        const errData = await response.json();
+        throw new Error(errData.match || errData.turn || "Error playing turn");
       }
+
       await fetchMatch();
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      setError(err.message);
     }
   };
-  useEffect(() => {
-    fetchMatch();
-  }, [matchId]);
 
-  return { match, loading, error, fetchMatch, playTurn };
-}
+  return { match, loading, error, playTurn };
+};
+
+export default useMatch;
